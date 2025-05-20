@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
 import './Header.scss';
 import {NavLink} from "react-router-dom";
+import {RootState} from "../../../store/store.config.ts";
+import {useSelector} from "react-redux";
 
 const Header = () => {
-    const [isAuth, setIsAuth] = useState(true);
+    const auth = useSelector((state: RootState) => state.authReducer);
 
     return (
         <header>
@@ -13,7 +14,7 @@ const Header = () => {
             >
                 CourseWork
             </NavLink>
-            {isAuth &&
+            {auth.isAuth &&
 
                 <div>
                     <NavLink
@@ -24,7 +25,7 @@ const Header = () => {
                     </NavLink>
                 </div>
             }
-            {!isAuth &&
+            {!auth.isAuth &&
                 <div>
                     <NavLink
                         to={'/login'}

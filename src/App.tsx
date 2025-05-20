@@ -5,6 +5,8 @@ import HomePage from "./components/pages/HomePage/HomePage.tsx";
 import LoginPage from "./components/pages/LoginPage/LoginPage.tsx";
 import ProfilePage from "./components/pages/ProfilePage/ProfilePage.tsx";
 import ErrorPage from "./components/pages/ErrorPage/ErrorPage.tsx";
+import RegisterPage from "./components/pages/RegisterPage/RegisterPage.tsx";
+import ProtectedRoute from "./components/entities/ProtectedRoute/ProtectedRoute.tsx";
 
 function App() {
 
@@ -21,11 +23,11 @@ function App() {
             />
             <Route
                 path={'register'}
-                element={<LoginPage />}
+                element={<RegisterPage />}
             />
             <Route
                 path={'profile'}
-                element={<ProfilePage />}
+                element={<ProtectedRoute><ProfilePage /></ProtectedRoute>}
             />
         </Route>
         <Route

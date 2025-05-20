@@ -1,0 +1,38 @@
+header {
+  background-color: #ff9100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 80px;
+  color: white;
+  font-family: "Pacifico", cursive;
+  font-weight: 500;
+  font-style: normal;
+
+  .logo {
+    font-size: 2rem;
+    color: white;
+    text-decoration: none;
+
+  }
+
+  div {
+    display: flex;
+    gap: 15px;
+
+    a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.5rem;
+      transition: color 0.3s;
+
+      &:hover {
+        color: #f0f0f0;
+      }
+
+      &.active {
+        text-decoration: underline;
+      }
+    }
+  }
+}

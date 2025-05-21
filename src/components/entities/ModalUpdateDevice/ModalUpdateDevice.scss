@@ -1,0 +1,60 @@
+.device-modal-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 6px;
+  padding-top: 10px;
+
+  .modal-id {
+    display: none;
+  }
+
+  input{
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ff9100;
+    caret-color: #ff9100;
+
+    &:focus {
+      outline: none;
+      border: 1px solid #ff9100;
+    }
+  }
+
+  textarea {
+    resize: none;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ff9100;
+    caret-color: #ff9100;
+
+    &:focus {
+      outline: none;
+      border: 1px solid #ff9100;
+    }
+  }
+
+  label {
+    padding-top: 10px;
+  }
+
+
+
+  .submit-modal {
+    margin-top: 10px;
+    align-self: center;
+    width: 100px;
+    border: 1px solid #ff9100;
+    border-radius: 16px;
+    color: #ff9100;
+    padding: 6px 16px;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      background: #ff9100;
+      color: white;
+    }
+    &:active {
+      scale: 0.95;
+    }
+  }
+}

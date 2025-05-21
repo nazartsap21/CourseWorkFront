@@ -1,0 +1,36 @@
+.disconnect-modal-content {
+  text-align: center;
+  padding: 20px;
+
+  p {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #333;
+  }
+
+  .disconnect-modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+
+    .confirm-button,
+    .cancel-button {
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: 1px solid #ff9100;
+      color: #ff9100;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        background: #ff9100;
+        color: white;
+      }
+
+      &:active {
+        scale: 0.95;
+      }
+    }
+  }
+}

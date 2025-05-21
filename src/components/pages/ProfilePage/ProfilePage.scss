@@ -1,0 +1,96 @@
+.profile-page {
+  padding: 20px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+
+  h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .connect-button,
+  .disconnect-button,
+  .update-button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+
+    &:hover {
+      background-color: #e68a00; // Hardcoded darker shade of #ff9100
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  .update-button {
+    background-color: #4caf50;
+
+    &:hover {
+      background-color: #45a049; // Hardcoded darker shade of #4caf50
+    }
+  }
+
+  .disconnect-button {
+    background-color: #f44336;
+
+    &:hover {
+      background-color: #e53935; // Hardcoded darker shade of #f44336
+    }
+  }
+
+  .connect-button {
+    background-color: #2196f3;
+
+    &:hover {
+      background-color: #1e88e5; // Hardcoded darker shade of #2196f3
+    }
+  }
+
+  .profile-details {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    p {
+      margin: 10px 0;
+      font-size: 1rem;
+      color: #555;
+
+      strong {
+        color: #333;
+      }
+    }
+
+    h2 {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      color: #333;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background: #f9f9f9;
+
+        p {
+          margin: 5px 0;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+.modal-connect-device {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5); // Semi-transparent background
+  z-index: 1000;
+
+  .modal-content {
+    background: #ffffff; // White background for the modal
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      color: #333;
+    }
+
+    p {
+      margin-bottom: 20px;
+      font-size: 1rem;
+      color: #666;
+    }
+
+    .modal-buttons {
+      display: flex;
+      justify-content: space-between;
+
+      button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s ease;
+
+        &.confirm-button {
+          background: #4caf50;
+          color: #fff;
+
+          &:hover {
+            background: #45a049;
+          }
+        }
+
+        &.cancel-button {
+          background: #f44336;
+          color: #fff;
+
+          &:hover {
+            background: #e53935;
+          }
+        }
+      }
+    }
+  }
+}

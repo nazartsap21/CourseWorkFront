@@ -30,8 +30,8 @@ const ModalUpdateDevice: FC<ModalUpdateDeviceProps> = ({ device, setDevice, hand
                     placeholder={"Location"}
                     rows={5}
                     name={"modal-name"}
-                    value={device.location}
-                    onChange={(e) => setDevice({...device, location: e.target.value})}
+                    value={device.description}
+                    onChange={(e) => setDevice({...device, description: e.target.value})}
                 ></textarea>
                 <button className={'submit-modal'} type={'submit'}>Submit</button>
             </form>

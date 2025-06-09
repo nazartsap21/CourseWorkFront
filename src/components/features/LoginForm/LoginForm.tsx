@@ -7,9 +7,11 @@ import { useNavigate } from "react-router-dom";
 import {login} from "../../../store/authSlice.ts";
 // import {unwrapResult} from "@reduxjs/toolkit";
 
+
 const LoginForm = () => {
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
+
     const checkoutSchema = Yup.object().shape({
         email: Yup.string()
             .email('Invalid email')
@@ -24,6 +26,13 @@ const LoginForm = () => {
         try {
             await dispatch(login(values));
             // const result = unwrapResult(resultAction);
+
+            const redirectAfterLogin = localStorage.getItem('redirectAfterLogin');
+            if (redirectAfterLogin) {
+                localStorage.removeItem('redirectAfterLogin');
+                navigate(redirectAfterLogin);
+                return;
+            }
             navigate('/profile');
         } catch (error) {
             alert('Invalid email or password');

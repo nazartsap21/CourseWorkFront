@@ -1,0 +1,94 @@
+.device {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  margin-bottom: 15px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .air-quality-circle {
+    width: 200px;
+  }
+
+  .star-button {
+    font-size: 34px;
+    color: #ffd700;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+  }
+
+  .device-details {
+    flex: 1;
+    margin-left: 15px;
+
+    p {
+      margin: 5px 0;
+      font-size: 0.9rem;
+      color: #555;
+
+      strong {
+        color: #333;
+      }
+    }
+  }
+
+  .device-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-start;
+    gap: 10px;
+
+    & > button, a {
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        scale: 1.08;
+      }
+      &:active {
+          scale: 0.95;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .device {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+
+    .air-quality-circle {
+      width: 150px;
+    }
+
+    .device-details {
+      margin-left: 0;
+
+      p {
+        font-size: 0.8rem;
+      }
+    }
+
+    .device-actions {
+      align-self: stretch;
+      justify-content: space-between;
+
+      & > button, a {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}

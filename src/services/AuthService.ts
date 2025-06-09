@@ -23,6 +23,6 @@ export default class AuthService {
     }
 
     static async checkAuth(): Promise<AxiosResponse<{ data: string }>> {
-        return $api.post('/auth/check-token');
+        return $api.post('/auth/check-token', {});
     }
 }

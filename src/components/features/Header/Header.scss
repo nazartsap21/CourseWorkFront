@@ -36,3 +36,22 @@ header {
     }
   }
 }
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    padding: 15px 20px;
+
+    .logo {
+      font-size: 1.5rem;
+    }
+
+    div {
+      gap: 10px;
+
+      a {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}

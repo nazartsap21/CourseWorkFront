@@ -25,8 +25,8 @@ export const disconnectDevice = createAsyncThunk(
 
 export const updateDevice = createAsyncThunk(
     'profile/updateDevice',
-    async (data: { deviceId: string; name: string; location: string }) => {
-        const response = await ProfileServices.updateDevice(data.deviceId, data.name, data.location);
+    async (data: { deviceId: string; name: string; description: string }) => {
+        const response = await ProfileServices.updateDevice(data.deviceId, data.name, data.description);
         return response.data;
     }
 );

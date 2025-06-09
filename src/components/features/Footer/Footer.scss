@@ -32,3 +32,18 @@ footer {
     }
   }
 }
+
+@media (max-width: 768px) {
+  .footer-content {
+    padding: 0 10px;
+
+    .footer-links {
+      flex-direction: column;
+      gap: 10px;
+
+      a {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}

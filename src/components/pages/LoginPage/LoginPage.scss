@@ -31,3 +31,21 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .login-page {
+    padding: 10px;
+
+    .login-page-title {
+      font-size: 1.5rem;
+    }
+
+    .login-page-footer {
+      font-size: 0.9rem;
+
+      a {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}

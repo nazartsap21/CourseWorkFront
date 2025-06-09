@@ -17,9 +17,13 @@ export default class ProfileServices {
     static async updateDevice(
         deviceId: string,
         name: string,
-        location: string
+        description: string
     ): Promise<AxiosResponse> {
-        return $api.post('/user/update-device', { deviceId, name, location });
+        return $api.post('/user/update-device', { deviceId, name, description });
+    }
+
+    static async starDevice(deviceId: string): Promise<AxiosResponse> {
+        return $api.post('/user/star-device', { deviceId });
     }
 
     static async changePassword(newPassword: string): Promise<AxiosResponse> {

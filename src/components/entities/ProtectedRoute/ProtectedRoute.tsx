@@ -31,6 +31,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     }
 
     if (!isAuthenticated) {
+        localStorage.setItem('redirectAfterLogin', location.pathname + location.search);
         return <Navigate to="/login" state={{ from: location }} replace />;
     }
 

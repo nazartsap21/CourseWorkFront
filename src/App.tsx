@@ -7,35 +7,53 @@ import ProfilePage from "./components/pages/ProfilePage/ProfilePage.tsx";
 import ErrorPage from "./components/pages/ErrorPage/ErrorPage.tsx";
 import RegisterPage from "./components/pages/RegisterPage/RegisterPage.tsx";
 import ProtectedRoute from "./components/entities/ProtectedRoute/ProtectedRoute.tsx";
+import DevicePage from "./components/pages/DevicePage/DevicePage.tsx";
+import QRCodeHandlePage from "./components/pages/QRCodeHandlePage/QRCodeHandlePage.tsx";
+import { useEffect } from 'react';
+import { checkAuth } from './store/authSlice.ts';
+import {useDispatch} from "react-redux";
+import {AppDispatch} from "./store/store.config.ts";
 
 function App() {
+    const dispatch = useDispatch<AppDispatch>();
 
-  return (
-    <Routes>
-        <Route path="/" element={<Layout />}>
+    useEffect(() => {
+      dispatch(checkAuth());
+    }, [dispatch]);
+    return (
+        <Routes>
+            <Route path="/" element={<Layout />}>
+                <Route
+                    index
+                    element={<HomePage />}
+                />
+                <Route
+                    path={'login'}
+                    element={<LoginPage />}
+                />
+                <Route
+                    path={'register'}
+                    element={<RegisterPage />}
+                />
+                <Route
+                    path={'/add-device/:deviceId'}
+                    element={<ProtectedRoute><QRCodeHandlePage /></ProtectedRoute>}
+                />
+                <Route
+                    path={'profile'}
+                    element={<ProtectedRoute><ProfilePage /></ProtectedRoute>}
+                />
+                <Route
+                    path={'/profile/device/:id'}
+                    element={<ProtectedRoute><DevicePage /></ProtectedRoute>}
+                />
+            </Route>
             <Route
-                index
-                element={<HomePage />}
+                path={'*'}
+                element={<ErrorPage />}
             />
-            <Route
-                path={'login'}
-                element={<LoginPage />}
-            />
-            <Route
-                path={'register'}
-                element={<RegisterPage />}
-            />
-            <Route
-                path={'profile'}
-                element={<ProtectedRoute><ProfilePage /></ProtectedRoute>}
-            />
-        </Route>
-        <Route
-            path={'*'}
-            element={<ErrorPage />}
-        />
-    </Routes>
-  )
+        </Routes>
+    )
 }
 
 export default App

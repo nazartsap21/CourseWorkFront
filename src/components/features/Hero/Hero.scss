@@ -21,3 +21,19 @@
     flex: 1;
   }
 }
+
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+
+    h2 {
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+
+    img {
+      max-width: 100%;
+    }
+  }
+}

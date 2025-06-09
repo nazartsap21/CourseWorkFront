@@ -38,8 +38,6 @@
     padding-top: 10px;
   }
 
-
-
   .submit-modal {
     margin-top: 10px;
     align-self: center;
@@ -55,6 +53,21 @@
     }
     &:active {
       scale: 0.95;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .device-modal-form {
+    padding: 10px;
+
+    input, textarea {
+      font-size: 0.9rem;
+    }
+
+    .submit-modal {
+      width: 80px;
+      font-size: 0.9rem;
     }
   }
 }

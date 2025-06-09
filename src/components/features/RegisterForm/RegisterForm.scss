@@ -58,3 +58,10 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .register-form {
+    padding: 10px;
+    max-width: 100%;
+  }
+}

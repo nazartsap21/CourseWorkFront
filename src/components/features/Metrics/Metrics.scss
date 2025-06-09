@@ -22,3 +22,14 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .metrics {
+    flex-direction: column;
+    gap: 20px;
+
+    .metric {
+      margin: 0;
+    }
+  }
+}

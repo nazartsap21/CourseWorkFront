@@ -1,0 +1,12 @@
+.devices-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+@media (max-width: 768px) {
+  .devices-section {
+    gap: 10px;
+  }
+}

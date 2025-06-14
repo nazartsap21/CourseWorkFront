@@ -28,6 +28,12 @@ const RegisterForm = () => {
     const handleSubmit = (values: {email: string, password: string, firstName: string, lastName: string}) => {
         AuthService.register(values.email, values.password, values.firstName, values.lastName).then(async () => {
             await dispatch(login(values));
+            const redirectAfterLogin = localStorage.getItem('redirectAfterLogin');
+            if (redirectAfterLogin) {
+                localStorage.removeItem('redirectAfterLogin');
+                navigate(redirectAfterLogin);
+                return;
+            }
             navigate('/profile');
         })
     }

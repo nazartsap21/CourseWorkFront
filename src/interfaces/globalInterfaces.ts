@@ -13,7 +13,14 @@ export interface UserDevice {
     device: Device;
 }
 
-interface Profile {
+export interface UserUpdateDevice {
+    id: string;
+    name: string;
+    description: string;
+    device: Device;
+}
+
+export interface Profile {
     email: string;
     firstName: string;
     lastName: string;

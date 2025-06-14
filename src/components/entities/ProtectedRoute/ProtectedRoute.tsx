@@ -16,14 +16,16 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     useEffect(() => {
         dispatch(checkAuth())
             .then((result) => {
-                console.log(result);
-                setIsAuthenticated(result.payload.data.isAuth);
+                if (result.payload && typeof result.payload === 'object' && 'data' in result.payload) {
+                    const payload = result.payload as { data: { isAuth: boolean } };
+                    setIsAuthenticated(payload.data.isAuth);
+                } else {
+                    setIsAuthenticated(false);
+                }
             })
             .catch(() => {
                 setIsAuthenticated(false);
             });
-
-
     }, []);
 
     if (isAuthenticated === null) {

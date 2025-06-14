@@ -48,7 +48,7 @@ const Device: React.FC<DeviceProps> = ({ device, onEdit, onDisconnect, onStar}) 
                     }}
                     value={Number(device.device.airQuality)}
                 />
-                <p style={{ marginTop: '-14px', fontSize: '16px', color: '#333', justifySelf: "center"}}>
+                <p className={"air-quality-text"}>
                     Air Quality
                 </p>
             </div>

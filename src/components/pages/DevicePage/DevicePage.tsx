@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from 'react-redux';
 import {
     LineChart,
     Line,
@@ -12,18 +13,24 @@ import {
     ReferenceArea
 } from 'recharts';
 import { GaugeComponent } from 'react-gauge-component';
+import { RootState } from '../../../store/store.config';
 import DeviceDataService from "../../../services/DeviceDataService.ts";
-import { DeviceData } from "../../../interfaces/globalInterfaces.ts";
+import ProfileServices from '../../../services/ProfileServices';
+import {DeviceData, Profile, UserUpdateDevice} from "../../../interfaces/globalInterfaces.ts";
 import { getTemperatureZones, getHumidityZones } from '../../../utils/zones.ts';
 import ModalUpdateDevice from "../../entities/ModalUpdateDevice/ModalUpdateDevice.tsx";
 import './DevicePage.scss';
 import update from "../../entities/Device/update.svg";
+import DeviceService from "../../../services/DeviceService.ts";
+
 
 const DevicePage = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
     const [deviceData, setDeviceData] = useState<DeviceData[]>([]);
     const [overallAirQuality, setOverallAirQuality] = useState<number | null>(null);
+    const loggedInUser = useSelector((state: RootState) => state.profileReducer.profile?.email);
+
     const [averages, setAverages] = useState({
         tempAvg: 0,
         humidityAvg: 0,
@@ -48,11 +55,11 @@ const DevicePage = () => {
     });
 
     const [activeUpdate, setActiveUpdate] = useState(false);
-    const [updatedDevice, setUpdatedDevice] = useState({
+    const [updatedDevice, setUpdatedDevice] = useState<UserUpdateDevice>({
         id: '',
         name: '',
         description: '',
-        device: { uniqueDeviceId: '' }
+        device: {id: '', airQuality: '', uniqueDeviceId: '', lastDataReceived: ''}
     });
 
     const now = new Date();
@@ -82,8 +89,11 @@ const DevicePage = () => {
             updatedDevice.name,
             updatedDevice.description
         );
-
-        fetchDeviceData();
+        setDeviceDetails({
+            id: updatedDevice.device.uniqueDeviceId,
+            name: updatedDevice.name,
+            description: updatedDevice.description,
+        })
         setActiveUpdate(false);
     };
 
@@ -91,27 +101,69 @@ const DevicePage = () => {
     useEffect(() => {
         if (!id) return;
 
-        DeviceDataService.getDeviceData(id).then((response) => {
-            const data = response.data;
-            setDeviceData(data);
-
-            setDeviceDetails({
-                id,
-                name: "Device Name",
-                description: "Device Description",
-            });
-
-            if (data.length > 0) {
-                const latestData = data[data.length - 1];
-                setOverallAirQuality(latestData.airQuality);
-                setAverages({
-                    tempAvg: latestData.tempAvg,
-                    humidityAvg: latestData.humidityAvg,
-                    ppmAvg: latestData.ppmAvg,
-                });
+        const fetchDeviceData = async () => {
+            try {
+                const response = await DeviceDataService.getDeviceData(id);
+                const data = response.data;
+                setDeviceData(data);
+                if (data.length > 0) {
+                    const latestData = data[data.length - 1];
+                    setOverallAirQuality(latestData.airQuality);
+                    setAverages({
+                        tempAvg: latestData.tempAvg,
+                        humidityAvg: latestData.humidityAvg,
+                        ppmAvg: latestData.ppmAvg,
+                    });
+                }
+            } catch (error) {
+                console.error("Error fetching device data:", error);
             }
-        });
-    }, [id]);
+        };
+
+        const fetchDeviceDetails = async () => {
+            try {
+                const response = await DeviceService.getDevice(id);
+                const profile = await ProfileServices.getProfile();
+                const device = response.data;
+
+                console.log("Device userDevices:", device.userDevices);
+                console.log("Logged-in user email:", loggedInUser);
+
+                const userDevice = device.userDevices.find(
+                    (userDevice: Profile) => userDevice.user.email === profile.data.email
+                );
+
+                if (userDevice) {
+                    setDeviceDetails({
+                        id: device.uniqueDeviceId,
+                        name: userDevice.name || "Device Name Not Set",
+                        description: userDevice.description || "No description available",
+                    });
+                } else {
+                    console.warn("No matching user device found for the logged-in user.");
+                    setDeviceDetails({
+                        id: device.uniqueDeviceId,
+                        name: device.defaultName || "Device Name Not Set",
+                        description: device.defaultDescription || "No description available",
+                    });
+                }
+            } catch (error) {
+                console.error("Error fetching device details:", error);
+            }
+        };
+
+        fetchDeviceData();
+        fetchDeviceDetails();
+
+        const interval = setInterval(() => {
+            fetchDeviceData();
+        }, 30000);
+
+        return () => clearInterval(interval);
+    }, [id, loggedInUser]);
+
+
+
 
     const getFilteredData = () => {
         const now = new Date();
@@ -264,7 +316,12 @@ const DevicePage = () => {
                                 id: deviceDetails.id,
                                 name: deviceDetails.name,
                                 description: deviceDetails.description,
-                                device: { uniqueDeviceId: id || '' }
+                                device: {
+                                    id: deviceDetails.id,
+                                    airQuality: overallAirQuality?.toString() || '',
+                                    lastDataReceived: new Date().toISOString(),
+                                    uniqueDeviceId: id || ''
+                                },
                             });
                         }}
                         className="edit-button"

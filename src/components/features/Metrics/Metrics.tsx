@@ -1,4 +1,3 @@
-import React from 'react';
 import './Metrics.scss';
 import temperatureImage from '../../../assets/img/temperature.png';
 import humidityImage from '../../../assets/img/humidity.png';

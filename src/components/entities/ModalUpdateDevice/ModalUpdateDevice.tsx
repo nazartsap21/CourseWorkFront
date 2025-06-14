@@ -1,12 +1,12 @@
 import  {Dispatch, FC, FormEvent, SetStateAction} from 'react';
 import './ModalUpdateDevice.scss';
 import Modal from "../../common/Modal/Modal";
-import {UserDevice} from "../../../interfaces/globalInterfaces.ts";
+import {UserUpdateDevice} from "../../../interfaces/globalInterfaces.ts";
 
 
 interface ModalUpdateDeviceProps {
-    device: UserDevice,
-    setDevice: (device: UserDevice) => void,
+    device: UserUpdateDevice,
+    setDevice: (device: UserUpdateDevice) => void,
     handleSubmit: (e: FormEvent) => void,
     headerText: string,
     active: boolean,

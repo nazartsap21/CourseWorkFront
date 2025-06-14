@@ -1,4 +1,3 @@
-import React from 'react';
 import './Steps.scss';
 
 const Steps = () => {
